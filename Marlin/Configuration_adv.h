@@ -163,7 +163,7 @@
  */
 #if ENABLED(THERMAL_PROTECTION_HOTENDS)
   #define THERMAL_PROTECTION_PERIOD 40        // Seconds
-  #define THERMAL_PROTECTION_HYSTERESIS 4     // Degrees Celsius
+  #define THERMAL_PROTECTION_HYSTERESIS 20     // Degrees Celsius
 
   //#define ADAPTIVE_FAN_SLOWING              // Slow part cooling fan if temperature drops
   #if BOTH(ADAPTIVE_FAN_SLOWING, PIDTEMP)
@@ -626,7 +626,7 @@
  * the position of the toolhead relative to the workspace.
  */
 
-//#define SENSORLESS_BACKOFF_MM  { 2, 2 }     // (mm) Backoff from endstops before sensorless homing
+#define SENSORLESS_BACKOFF_MM  { 2, 2 }     // (mm) Backoff from endstops before sensorless homing
 
 #define HOMING_BUMP_MM      { 5, 5, 2 }       // (mm) Backoff from endstops after first bump
 #define HOMING_BUMP_DIVISOR { 2, 2, 4 }       // Re-Bump Speed Divisor (Divides the Homing Feedrate)
@@ -657,7 +657,7 @@
 
   // Safety: The probe needs time to recognize the command.
   //         Minimum command delay (ms). Enable and increase if needed.
-  //#define BLTOUCH_DELAY 500
+  #define BLTOUCH_DELAY 500
 
   /**
    * Settings for BLTOUCH Classic 1.2, 1.3 or BLTouch Smart 1.0, 2.0, 2.2, 3.0, 3.1, and most clones:
@@ -683,7 +683,7 @@
    * differs, a mode set eeprom write will be completed at initialization.
    * Use the option below to force an eeprom write to a V3.1 probe regardless.
    */
-  //#define BLTOUCH_SET_5V_MODE
+  #define BLTOUCH_SET_5V_MODE
 
   /**
    * Safety: Activate if connecting a probe with an unknown voltage mode.
@@ -699,7 +699,7 @@
    * This feature was designed for Delta's with very fast Z moves however higher speed cartesians may function
    * If the machine cannot raise the probe fast enough after a trigger, it may enter a fault state.
    */
-  //#define BLTOUCH_HS_MODE
+  #define BLTOUCH_HS_MODE
 
   // Safety: Enable voltage mode settings in the LCD menu.
   //#define BLTOUCH_LCD_VOLTAGE_MENU
@@ -783,7 +783,7 @@
 // Default stepper release if idle. Set to 0 to deactivate.
 // Steppers will shut down DEFAULT_STEPPER_DEACTIVE_TIME seconds after the last move when DISABLE_INACTIVE_? is true.
 // Time can be set by M18 and M84.
-#define DEFAULT_STEPPER_DEACTIVE_TIME 120
+#define DEFAULT_STEPPER_DEACTIVE_TIME 0
 #define DISABLE_INACTIVE_X true
 #define DISABLE_INACTIVE_Y true
 #define DISABLE_INACTIVE_Z true  // Set to false if the nozzle will fall down on your printed part when print has finished.
@@ -824,7 +824,7 @@
 // Backlash Compensation
 // Adds extra movement to axes on direction-changes to account for backlash.
 //
-//#define BACKLASH_COMPENSATION
+#define BACKLASH_COMPENSATION
 #if ENABLED(BACKLASH_COMPENSATION)
   // Define values for backlash distance and correction.
   // If BACKLASH_GCODE is enabled these values are the defaults.
@@ -836,7 +836,7 @@
   //#define BACKLASH_SMOOTHING_MM 3 // (mm)
 
   // Add runtime configuration and tuning of backlash values (M425)
-  //#define BACKLASH_GCODE
+  #define BACKLASH_GCODE
 
   #if ENABLED(BACKLASH_GCODE)
     // Measure the Z backlash when probing (G29) and set with "M425 Z"
@@ -912,7 +912,7 @@
  * vibration and surface artifacts. The algorithm adapts to provide the best possible step smoothing at the
  * lowest stepping frequencies.
  */
-//#define ADAPTIVE_STEP_SMOOTHING
+#define ADAPTIVE_STEP_SMOOTHING
 
 /**
  * Custom Microstepping
@@ -976,8 +976,8 @@
    * AZTEEG_X5_MINI_WIFI         0x58              0x5C        MCP4451
    * MIGHTYBOARD_REVE      0x2F (0x5E)                         MCP4018
    */
-  //#define DIGIPOT_I2C_ADDRESS_A 0x2C  // Unshifted slave address for first DIGIPOT
-  //#define DIGIPOT_I2C_ADDRESS_B 0x2D  // Unshifted slave address for second DIGIPOT
+  #define DIGIPOT_I2C_ADDRESS_A 0x2C  // unshifted slave address for first DIGIPOT
+  #define DIGIPOT_I2C_ADDRESS_B 0x2D  // unshifted slave address for second DIGIPOT
 #endif
 
 //===========================================================================
@@ -1333,18 +1333,18 @@
   #define STATUS_HOTEND_ANIM          // Use a second bitmap to indicate hotend heating
   #define STATUS_BED_ANIM             // Use a second bitmap to indicate bed heating
   #define STATUS_CHAMBER_ANIM         // Use a second bitmap to indicate chamber heating
-  //#define STATUS_CUTTER_ANIM        // Use a second bitmap to indicate spindle / laser active
+  #define STATUS_CUTTER_ANIM          // Use a second bitmap to indicate spindle / laser active
   //#define STATUS_ALT_BED_BITMAP     // Use the alternative bed bitmap
   //#define STATUS_ALT_FAN_BITMAP     // Use the alternative fan bitmap
-  //#define STATUS_FAN_FRAMES 3       // :[0,1,2,3,4] Number of fan animation frames
-  //#define STATUS_HEAT_PERCENT       // Show heating in a progress bar
+  #define STATUS_FAN_FRAMES 4       // :[0,1,2,3,4] Number of fan animation frames
+  #define STATUS_HEAT_PERCENT       // Show heating in a progress bar
   //#define BOOT_MARLIN_LOGO_SMALL    // Show a smaller Marlin logo on the Boot Screen (saving 399 bytes of flash)
   //#define BOOT_MARLIN_LOGO_ANIMATED // Animated Marlin logo. Costs ~‭3260 (or ~940) bytes of PROGMEM.
 
   // Frivolous Game Options
-  //#define MARLIN_BRICKOUT
-  //#define MARLIN_INVADERS
-  //#define MARLIN_SNAKE
+  #define MARLIN_BRICKOUT
+  #define MARLIN_INVADERS
+  #define MARLIN_SNAKE
   //#define GAMES_EASTER_EGG          // Add extra blank lines above the "Games" sub-menu
 
 #endif // HAS_GRAPHICAL_LCD
@@ -1519,7 +1519,7 @@
  *
  * Warning: Does not respect endstops!
  */
-//#define BABYSTEPPING
+#define BABYSTEPPING
 #if ENABLED(BABYSTEPPING)
   //#define INTEGRATED_BABYSTEPPING         // EXPERIMENTAL integration of babystepping into the Stepper ISR
   //#define BABYSTEP_WITHOUT_HOMING
@@ -1528,11 +1528,11 @@
   #define BABYSTEP_MULTIPLICATOR_Z  1       // Babysteps are very small. Increase for faster motion.
   #define BABYSTEP_MULTIPLICATOR_XY 1
 
-  //#define DOUBLECLICK_FOR_Z_BABYSTEPPING  // Double-click on the Status Screen for Z Babystepping.
+  #define DOUBLECLICK_FOR_Z_BABYSTEPPING  // Double-click on the Status Screen for Z Babystepping.
   #if ENABLED(DOUBLECLICK_FOR_Z_BABYSTEPPING)
     #define DOUBLECLICK_MAX_INTERVAL 1250   // Maximum interval between clicks, in milliseconds.
                                             // Note: Extra time may be added to mitigate controller latency.
-    //#define BABYSTEP_ALWAYS_AVAILABLE     // Allow babystepping at all times (not just during movement).
+    #define BABYSTEP_ALWAYS_AVAILABLE     // Allow babystepping at all times (not just during movement).
     //#define MOVE_Z_WHEN_IDLE              // Jump to the move Z menu on doubleclick when printer is idle.
     #if ENABLED(MOVE_Z_WHEN_IDLE)
       #define MOVE_Z_IDLE_MULTIPLICATOR 1   // Multiply 1mm by this factor for the move step size.
@@ -1565,12 +1565,12 @@
  *
  * See https://marlinfw.org/docs/features/lin_advance.html for full instructions.
  */
-//#define LIN_ADVANCE
+#define LIN_ADVANCE
 #if ENABLED(LIN_ADVANCE)
   //#define EXTRA_LIN_ADVANCE_K // Enable for second linear advance constants
-  #define LIN_ADVANCE_K 0.22    // Unit: mm compression per 1mm/s extruder speed
-  //#define LA_DEBUG            // If enabled, this will generate debug information output over USB.
-  //#define EXPERIMENTAL_SCURVE // Enable this option to permit S-Curve Acceleration
+  #define LIN_ADVANCE_K 0.11    // Unit: mm compression per 1mm/s extruder speed
+  #define LA_DEBUG            // If enabled, this will generate debug information output over USB.
+  #define EXPERIMENTAL_SCURVE // Enable this option to permit S-Curve Acceleration
 #endif
 
 // @section leveling
@@ -1825,7 +1825,7 @@
  * Currently handles M108, M112, M410, M876
  * NOTE: Not yet implemented for all platforms.
  */
-//#define EMERGENCY_PARSER
+#define EMERGENCY_PARSER
 
 // Bad Serial-connections can miss a received command by sending an 'ok'
 // Therefore some clients abort after 30 seconds in a timeout.
@@ -2143,9 +2143,9 @@
   #define INTERPOLATE       true  // Interpolate X/Y/Z_MICROSTEPS to 256
 
   #if AXIS_IS_TMC(X)
-    #define X_CURRENT       800        // (mA) RMS current. Multiply by 1.414 for peak current.
+    #define X_CURRENT       610        // (mA) RMS current. Multiply by 1.414 for peak current.
     #define X_CURRENT_HOME  X_CURRENT  // (mA) RMS current for sensorless homing
-    #define X_MICROSTEPS     16    // 0..256
+    #define X_MICROSTEPS     32    // 0..256
     #define X_RSENSE          0.11
     #define X_CHAIN_POS      -1    // <=0 : Not chained. 1 : MCU MOSI connected. 2 : Next in chain, ...
   #endif
@@ -2159,9 +2159,9 @@
   #endif
 
   #if AXIS_IS_TMC(Y)
-    #define Y_CURRENT       800
+    #define Y_CURRENT       610
     #define Y_CURRENT_HOME  Y_CURRENT
-    #define Y_MICROSTEPS     16
+    #define Y_MICROSTEPS     32
     #define Y_RSENSE          0.11
     #define Y_CHAIN_POS      -1
   #endif
@@ -2175,9 +2175,9 @@
   #endif
 
   #if AXIS_IS_TMC(Z)
-    #define Z_CURRENT       800
+    #define Z_CURRENT       500
     #define Z_CURRENT_HOME  Z_CURRENT
-    #define Z_MICROSTEPS     16
+    #define Z_MICROSTEPS     32
     #define Z_RSENSE          0.11
     #define Z_CHAIN_POS      -1
   #endif
@@ -2207,15 +2207,15 @@
   #endif
 
   #if AXIS_IS_TMC(E0)
-    #define E0_CURRENT      800
-    #define E0_MICROSTEPS    16
+    #define E0_CURRENT     910
+    #define E0_MICROSTEPS    32
     #define E0_RSENSE         0.11
     #define E0_CHAIN_POS     -1
   #endif
 
   #if AXIS_IS_TMC(E1)
-    #define E1_CURRENT      800
-    #define E1_MICROSTEPS    16
+    #define E1_CURRENT      810
+    #define E1_MICROSTEPS    32
     #define E1_RSENSE         0.11
     #define E1_CHAIN_POS     -1
   #endif
@@ -2352,7 +2352,7 @@
    * Define you own with
    * { <off_time[1..15]>, <hysteresis_end[-3..12]>, hysteresis_start[1..8] }
    */
-  #define CHOPPER_TIMING CHOPPER_DEFAULT_12V
+  #define CHOPPER_TIMING CHOPPER_DEFAULT_24V
 
   /**
    * Monitor Trinamic drivers
@@ -2365,7 +2365,7 @@
    * M912 - Clear stepper driver overtemperature pre-warn condition flag.
    * M122 - Report driver parameters (Requires TMC_DEBUG)
    */
-  //#define MONITOR_DRIVER_STATUS
+  #define MONITOR_DRIVER_STATUS
 
   #if ENABLED(MONITOR_DRIVER_STATUS)
     #define CURRENT_STEP_DOWN     50  // [mA]
@@ -2422,15 +2422,15 @@
    * IMPROVE_HOMING_RELIABILITY tunes acceleration and jerk when
    * homing and adds a guard period for endstop triggering.
    */
-  //#define SENSORLESS_HOMING // StallGuard capable drivers only
+  #define SENSORLESS_HOMING // StallGuard capable drivers only
 
   #if EITHER(SENSORLESS_HOMING, SENSORLESS_PROBING)
     // TMC2209: 0...255. TMC2130: -64...63
-    #define X_STALL_SENSITIVITY  8
+    #define X_STALL_SENSITIVITY  110
     #define X2_STALL_SENSITIVITY X_STALL_SENSITIVITY
-    #define Y_STALL_SENSITIVITY  8
+    #define Y_STALL_SENSITIVITY  110
     #define Y2_STALL_SENSITIVITY Y_STALL_SENSITIVITY
-    //#define Z_STALL_SENSITIVITY  8
+    //#define Z_STALL_SENSITIVITY  75
     //#define Z2_STALL_SENSITIVITY Z_STALL_SENSITIVITY
     //#define Z3_STALL_SENSITIVITY Z_STALL_SENSITIVITY
     //#define Z4_STALL_SENSITIVITY Z_STALL_SENSITIVITY
@@ -2454,13 +2454,13 @@
    * Beta feature!
    * Create a 50/50 square wave step pulse optimal for stepper drivers.
    */
-  //#define SQUARE_WAVE_STEPPING
+  #define SQUARE_WAVE_STEPPING
 
   /**
    * Enable M122 debugging command for TMC stepper drivers.
    * M122 S0/1 will enable continous reporting.
    */
-  //#define TMC_DEBUG
+  #define TMC_DEBUG
 
   /**
    * You can set your own advanced settings by filling in predefined functions.
@@ -3392,7 +3392,7 @@
 //
 // M43 - display pin status, toggle pins, watch pins, watch endstops & toggle LED, test servo probe
 //
-//#define PINS_DEBUGGING
+#define PINS_DEBUGGING
 
 // Enable Marlin dev mode which adds some special commands
 //#define MARLIN_DEV_MODE
